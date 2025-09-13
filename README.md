@@ -23,7 +23,7 @@ Our platform is designed for all DeFi users on the Solana blockchain, from newco
 ## Technologies Used
 
 *   **Blockchain:** [Solana](https://solana.com/) - for high-speed and low-cost transactions.
-*   **Liquidity Aggregation:** [Raydium](https://raydium.io/), [Jupiter](https://jup.ag/), [Serum](https://www.projectserum.com/) - integrated for deep liquidity and optimal trade execution.
+*   **Liquidity Aggregation:** [Raydium](https://raydium.io/), [Jupiter](https://jup.ag/), [Serum](https://docs.projectserum.com/serum-ecosystem/build-on-serum) - integrated for deep liquidity and optimal trade execution.
 *   **Real-time Monitoring:** [Helius](https://www.helius.dev/) - for reliable, real-time on-chain data and API access.
 *   **Intelligence:** **AI-Module** - for providing personalized investment recommendations and strategy insights.
 
