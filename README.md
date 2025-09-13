@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kazachi Kapai
 
-## Getting Started
+## Core Mission
 
-First, run the development server:
+To eliminate chaos in the DeFi space by creating a user-friendly aggregator of governance strategies on the Solana blockchain. We aim to build a new model of trust and decision-making in DeFi.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Key Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+*   **💬 DeFi Aggregator with a Chat Interface:** Interact with DeFi protocols through a simple, intuitive chat-based interface instead of complex dashboards.
+*   **🛡️ "Collective Trust" Filter:** Investment opportunities are vetted by the community. Proposals must pass a "Collective Trust" filter, ensuring a layer of collective due diligence.
+*   **📈 Social Capital and Reputation System:** The influence of your vote is earned. Successful participation and accurate predictions increase the weight of your vote, building your reputation within the community.
+*   **🤖 AI-Powered Strategy Recommendations:** Our AI analyzes historical data and user voting patterns to suggest personalized investment strategies, helping you make informed decisions.
+*   **🎮 Gamified Governance:** We make governance engaging and rewarding. Our gamified system motivates users to participate actively and make conscious, well-thought-out decisions.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Problem Solved
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Kazachi Kapai addresses the critical gap in the Solana ecosystem for a trust and gamification layer. It provides a structured, community-driven mechanism to filter and validate investment ideas, reducing the noise and chaos often found in the DeFi space.
 
-## Learn More
+## Target Audience
 
-To learn more about Next.js, take a look at the following resources:
+Our platform is designed for all DeFi users on the Solana blockchain, from newcomers seeking guidance to experienced veterans looking for a more efficient way to collaborate and vet opportunities.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Technologies Used
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+*   **Blockchain:** [Solana](https://solana.com/) - for high-speed and low-cost transactions.
+*   **Liquidity Aggregation:** [Raydium](https://raydium.io/), [Jupiter](https://jup.ag/), [Serum](https://www.projectserum.com/) - integrated for deep liquidity and optimal trade execution.
+*   **Real-time Monitoring:** [Helius](https://www.helius.dev/) - for reliable, real-time on-chain data and API access.
+*   **Intelligence:** **AI-Module** - for providing personalized investment recommendations and strategy insights.
 
-## Deploy on Vercel
+## Roadmap
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🚀 MVP
+*   [ ] Chat interface for seamless user interaction.
+*   [ ] Helius integration for real-time data.
+*   [ ] Integration with Raydium and Jupiter for liquidity.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 🔬 Alpha Version
+*   [ ] Expansion to more DeFi protocols.
+*   [ ] Launch of AI-powered recommendations.
+*   [ ] Onboard 1000+ active users.
+
+### 🧪 Beta Version
+*   [ ] Full governance integration with the reputation system.
+*   [ ] Introduction of leaderboards and rewards.
+*   [ ] AI model trained on real-world user data for enhanced accuracy.
+
+### 🌐 Scaling / Mainnet
+*   [ ] Launch of new investment vaults.
+*   [ ] Achieve > $10 million in Total Value Locked (TVL).
+*   [ ] Multi-chain expansion to other ecosystems.
+*   [ ] Transition to a fully decentralized DAO.

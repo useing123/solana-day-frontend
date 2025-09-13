@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import { Message } from "./message";
 import { InvestmentSuggestion } from "../investment-suggestion";
+import { TransactionModal } from "../transaction-modal";
+import { WalletButton } from "../wallet-button";
 import { toast } from "react-hot-toast";
 
 interface ChatMessage {
@@ -66,25 +68,42 @@ const mockSuggestions: InvestmentSuggestionData[] = [
   }
 ];
 
-const aiMessages = [
-  { content: "🚀 New yield farming opportunity detected! Current market conditions are favorable for DeFi investments.", type: 'investment' },
-  { content: "📊 Market Update: DeFi TVL has increased by 15% this week. High activity in yield farming protocols.", type: 'market_update' },
-  { content: "⚠️ Risk Alert: High volatility detected in governance tokens. Consider risk management strategies.", type: 'warning' },
-  { content: "💡 Strategy Tip: Dollar-cost averaging into stable pools can reduce risk while maintaining steady yields.", type: 'news' },
-  { content: "🔥 Hot Alert: Several protocols showing unusually high APY rates. Time-sensitive opportunities available.", type: 'investment' }
+// Pre-existing AI messages and ideas for consistency
+const existingAIMessages = [
+  { content: "🤖 AI Idea: Arbitrage opportunity detected between Raydium and Orca liquidity pools for SOL-USDC pair.", type: 'investment' },
+  { content: "📊 Market Analysis: Solana DeFi TVL trending upward. Perfect time for yield aggregation strategies.", type: 'market_update' },
+  { content: "💡 AI Strategy: Combine liquidity mining on multiple Solana DEXs to maximize governance token rewards.", type: 'news' },
+  { content: "🔥 AI Alert: Jupiter swap fees creating unique yield opportunities through volume-based rewards.", type: 'investment' },
+  { content: "⚡ Solana Speed: Take advantage of low transaction costs for frequent yield optimization rebalancing.", type: 'news' }
+];
+
+// Additional AI messages for new generation
+const newAIMessages = [
+  { content: "🧠 AI Discovery: Cross-protocol staking rewards on Marinade + Lido offering 12.8% compounded APY.", type: 'investment' },
+  { content: "📈 Smart Signal: Serum DEX volume spike suggests increased yield farming activity incoming.", type: 'market_update' },
+  { content: "⚡ AI Optimization: Flash loan arbitrage between Solana DEXs showing 3-5% profit margins.", type: 'investment' },
+  { content: "🎯 Strategy Alert: Governance mining on multiple protocols can yield additional 8-15% in tokens.", type: 'news' },
+  { content: "🔮 AI Prediction: Upcoming Solana protocol launches will create temporary high-yield opportunities.", type: 'market_update' }
 ];
 
 export function ChatInterface() {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
-      content: '📢 Welcome to YieldFarm Signals! This channel provides AI-powered yield farming investment signals and market analysis. Follow the latest DeFi opportunities!',
+      content: '📢 Welcome to Solana Yield Aggregator Demo! Watch as AI generates creative yield farming ideas for Solana protocols. Vote with 👍/👎 to help surface the best strategies. This is a showcase platform demonstrating yield aggregation concepts.',
       sender: 'system',
       timestamp: new Date(),
       messageType: 'news'
     }
   ]);
   const [reactions, setReactions] = useState<{[key: string]: {likes: number; dislikes: number; userLiked: boolean; userDisliked: boolean}}>({});
+  const [existingMessageIndex, setExistingMessageIndex] = useState(0);
+  const [showTransactionModal, setShowTransactionModal] = useState(false);
+  const [currentTransaction, setCurrentTransaction] = useState<{
+    type: 'like' | 'dislike' | 'invest';
+    suggestionId: string;
+    suggestionTitle: string;
+  } | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -95,7 +114,7 @@ export function ChatInterface() {
     scrollToBottom();
   }, [messages]);
 
-  // Auto-generate AI messages
+  // Auto-generate AI messages - show existing ideas first, then new ones
   useEffect(() => {
     const interval = setInterval(() => {
       const shouldPostSuggestion = Math.random() > 0.5;
@@ -110,7 +129,7 @@ export function ChatInterface() {
 
         const aiMessage: ChatMessage = {
           id: Date.now().toString(),
-          content: `🎯 AI Signal: High-potential yield farming opportunity identified`,
+          content: `🤖 AI Generated Yield Idea: Solana protocol opportunity analyzed`,
           sender: 'assistant',
           timestamp: new Date(),
           suggestion: suggestionWithNewId,
@@ -118,9 +137,27 @@ export function ChatInterface() {
         };
 
         setMessages(prev => [...prev, aiMessage]);
+
+        // Initialize reactions for new suggestions
+        setReactions(prev => ({
+          ...prev,
+          [suggestionWithNewId.id]: {
+            likes: Math.floor(Math.random() * 100) + 10,
+            dislikes: Math.floor(Math.random() * 20) + 2,
+            userLiked: false,
+            userDisliked: false
+          }
+        }));
       } else {
-        // Post regular AI message
-        const randomMessage = aiMessages[Math.floor(Math.random() * aiMessages.length)];
+        // Prioritize existing ideas first, then use new ones
+        const messageCount = messages.length;
+        const useExistingIdeas = messageCount < 8; // Show existing ideas for first few messages
+
+        const messagePool = useExistingIdeas
+          ? existingAIMessages
+          : Math.random() > 0.3 ? existingAIMessages : newAIMessages;
+
+        const randomMessage = messagePool[Math.floor(Math.random() * messagePool.length)];
         const aiMessage: ChatMessage = {
           id: Date.now().toString(),
           content: randomMessage.content,
@@ -130,30 +167,38 @@ export function ChatInterface() {
         };
 
         setMessages(prev => [...prev, aiMessage]);
-
-        // Initialize reactions for new suggestions
-        if (aiMessage.suggestion) {
-          setReactions(prev => ({
-            ...prev,
-            [aiMessage.suggestion!.id]: {
-              likes: Math.floor(Math.random() * 100) + 10,
-              dislikes: Math.floor(Math.random() * 20) + 2,
-              userLiked: false,
-              userDisliked: false
-            }
-          }));
-        }
       }
     }, 6000); // Post every 6 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [messages.length]);
 
-  const handleInvest = () => {
-    toast.success('🚀 Investment signal bookmarked! Added to your watchlist');
+  const handleInvest = (suggestionId: string, suggestionTitle: string) => {
+    setCurrentTransaction({
+      type: 'invest',
+      suggestionId,
+      suggestionTitle
+    });
+    setShowTransactionModal(true);
   };
 
   const handleReaction = (suggestionId: string, type: 'like' | 'dislike') => {
+    const suggestion = messages.find(m => m.suggestion?.id === suggestionId)?.suggestion;
+    if (!suggestion) return;
+
+    setCurrentTransaction({
+      type,
+      suggestionId,
+      suggestionTitle: `${suggestion.protocol} ${suggestion.tokenPair}`
+    });
+    setShowTransactionModal(true);
+  };
+
+  const handleTransactionConfirm = (signature?: string) => {
+    if (!currentTransaction) return;
+
+    const { type, suggestionId } = currentTransaction;
+
     setReactions(prev => {
       const current = prev[suggestionId] || { likes: 42, dislikes: 8, userLiked: false, userDisliked: false };
 
@@ -197,6 +242,11 @@ export function ChatInterface() {
         }
       }
     });
+
+    const message = signature
+      ? `🎉 ${currentTransaction.type === 'like' ? 'Vote recorded!' : 'Feedback recorded!'} Transaction: ${signature.slice(0, 8)}...`
+      : `🎉 ${currentTransaction.type === 'like' ? 'Vote recorded!' : 'Feedback recorded!'} Transaction signed successfully.`;
+    toast.success(message);
   };
 
   return (
@@ -205,18 +255,21 @@ export function ChatInterface() {
       <div className="flex items-center justify-between p-4 bg-white border-b-2 border-black">
         <div className="flex items-center gap-3">
           <div className="bg-black text-white px-3 py-1 font-bold text-xl">
-            🌾 YIELD.FARM
+            ⚡ SOLANA YIELD
           </div>
           <div className="bg-yellow-400 px-2 py-1 text-xs font-bold border-2 border-black">
-            15.2K TRADERS
+            AI GENERATOR
           </div>
           <div className="bg-cyan-400 px-2 py-1 text-xs font-bold border-2 border-black">
-            LIVE SIGNALS
+            SHOWCASE DEMO
           </div>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="w-3 h-3 bg-green-500 border border-black animate-pulse"></div>
-          <span className="font-bold text-sm">STREAMING</span>
+        <div className="flex items-center gap-4">
+          <WalletButton />
+          <div className="flex items-center gap-3">
+            <div className="w-3 h-3 bg-green-500 border border-black animate-pulse"></div>
+            <span className="font-bold text-sm">STREAMING</span>
+          </div>
         </div>
       </div>
 
@@ -233,7 +286,7 @@ export function ChatInterface() {
               <div className="ml-0">
                 <InvestmentSuggestion
                   {...message.suggestion}
-                  onInvest={handleInvest}
+                  onInvest={() => handleInvest(message.suggestion!.id, `${message.suggestion!.protocol} ${message.suggestion!.tokenPair}`)}
                   onReaction={handleReaction}
                   reactions={reactions[message.suggestion.id]}
                   timestamp={message.timestamp}
@@ -251,22 +304,37 @@ export function ChatInterface() {
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-green-400 animate-pulse"></div>
-              <span className="font-bold text-sm">LIVE FEED ACTIVE</span>
+              <span className="font-bold text-sm">AI GENERATOR ACTIVE</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-yellow-400"></div>
-              <span className="font-bold text-sm">{messages.length} SIGNALS TODAY</span>
+              <span className="font-bold text-sm">{messages.length} IDEAS GENERATED</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-cyan-400"></div>
-              <span className="font-bold text-sm">DeFi MARKETS OPEN</span>
+              <span className="font-bold text-sm">SOLANA PROTOCOLS</span>
             </div>
           </div>
-          <div className="bg-yellow-400 text-black px-4 py-2 font-black border-2 border-white">
-            FREE TO VIEW
+          <div className="bg-purple-400 text-black px-4 py-2 font-black border-2 border-white">
+            DEMO MODE
           </div>
         </div>
       </div>
+
+      {/* Transaction Modal */}
+      {showTransactionModal && currentTransaction && (
+        <TransactionModal
+          isOpen={showTransactionModal}
+          onClose={() => {
+            setShowTransactionModal(false);
+            setCurrentTransaction(null);
+          }}
+          onConfirm={handleTransactionConfirm}
+          type={currentTransaction.type}
+          suggestionTitle={currentTransaction.suggestionTitle}
+          suggestionId={currentTransaction.suggestionId}
+        />
+      )}
     </div>
   );
 }
