@@ -49,8 +49,12 @@ export function WalletButton() {
         setBalance(newBalance);
       }, 2000);
 
-    } catch (error: any) {
-      toast.error(error.message || 'Airdrop failed', { id: 'airdrop' });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message, { id: 'airdrop' });
+      } else {
+        toast.error('Airdrop failed', { id: 'airdrop' });
+      }
     } finally {
       setIsRequestingAirdrop(false);
     }

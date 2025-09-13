@@ -60,9 +60,13 @@ export function TransactionModal({ isOpen, onClose, onConfirm, type, suggestionT
       setTransactionSignature(signature);
       setProgress(100);
       setStep('success');
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Transaction failed:', error);
-      setError(error.message || 'Transaction failed');
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('Transaction failed');
+      }
       setStep('review');
       setProgress(0);
     }
@@ -90,8 +94,12 @@ export function TransactionModal({ isOpen, onClose, onConfirm, type, suggestionT
       setBalance(newBalance);
 
       toast.success('🎉 Airdrop successful! You can now sign transactions.', { id: 'modal-airdrop' });
-    } catch (error: any) {
-      toast.error(error.message || 'Airdrop failed', { id: 'modal-airdrop' });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message, { id: 'modal-airdrop' });
+      } else {
+        toast.error('Airdrop failed', { id: 'modal-airdrop' });
+      }
     } finally {
       setIsRequestingAirdrop(false);
     }

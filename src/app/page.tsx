@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { ChatInterface } from "@/components/chat/chat-interface";
 import { LandingPage } from "@/components/landing-page";
 
-const page = () => {
+const Page = () => {
   const [showApp, setShowApp] = useState(false);
 
   const handleEnterApp = () => {
@@ -31,4 +31,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

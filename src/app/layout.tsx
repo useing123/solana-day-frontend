@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { WalletContextProvider } from "@/components/wallet-provider";
+import "@solana/wallet-adapter-react-ui/styles.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

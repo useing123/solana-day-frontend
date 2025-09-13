@@ -113,14 +113,16 @@ export const requestAirdrop = async (publicKey: PublicKey): Promise<string> => {
     await connection.confirmTransaction(airdropSignature, 'confirmed');
 
     return airdropSignature;
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Airdrop failed:', error);
 
     // Handle common airdrop errors
-    if (error.message?.includes('airdrop request limit exceeded')) {
-      throw new Error('Airdrop limit exceeded. Please try again later or use a different wallet.');
-    } else if (error.message?.includes('insufficient funds')) {
-      throw new Error('Airdrop service temporarily unavailable. Try again in a few minutes.');
+    if (error instanceof Error) {
+      if (error.message.includes('airdrop request limit exceeded')) {
+        throw new Error('Airdrop limit exceeded. Please try again later or use a different wallet.');
+      } else if (error.message.includes('insufficient funds')) {
+        throw new Error('Airdrop service temporarily unavailable. Try again in a few minutes.');
+      }
     }
 
     throw new Error('Airdrop failed. Please try again.');
