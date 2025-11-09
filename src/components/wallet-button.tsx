@@ -61,36 +61,37 @@ export function WalletButton() {
   };
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-2 sm:gap-3">
       {connected && publicKey ? (
-        <div className="flex items-center gap-2">
-          <div className="bg-green-400 border-2 border-black px-2 py-1 font-bold text-xs">
+        <div className="flex items-center gap-1 sm:gap-2 flex-wrap">
+          <div className="hidden sm:block bg-green-400 border-2 border-black px-2 py-1 font-bold text-xs whitespace-nowrap">
             {wallet?.adapter.name || 'Wallet'}
           </div>
-          <div className="bg-white border-2 border-black px-2 py-1 font-bold text-xs text-gray-700">
+          <div className="bg-white border-2 border-black px-2 py-1 font-bold text-xs text-gray-700 whitespace-nowrap">
             {publicKey.toString().slice(0, 4)}...{publicKey.toString().slice(-4)}
           </div>
-          <div className="bg-yellow-400 border-2 border-black px-2 py-1 font-bold text-xs text-black">
+          <div className="bg-yellow-400 border-2 border-black px-2 py-1 font-bold text-xs text-black whitespace-nowrap">
             {balance.toFixed(3)} SOL
           </div>
           {balance < 0.01 && (
             <button
               onClick={handleAirdrop}
               disabled={isRequestingAirdrop}
-              className="bg-blue-400 hover:bg-blue-300 disabled:bg-gray-400 border-2 border-black px-2 py-1 font-bold text-xs text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] transition-all disabled:shadow-none disabled:translate-x-0 disabled:translate-y-0"
+              className="bg-blue-400 hover:bg-blue-300 disabled:bg-gray-400 border-2 border-black px-2 py-1 font-bold text-xs text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] transition-all disabled:shadow-none disabled:translate-x-0 disabled:translate-y-0 whitespace-nowrap"
             >
               {isRequestingAirdrop ? 'AIRDROP...' : 'GET SOL'}
             </button>
           )}
           <button
             onClick={disconnect}
-            className="bg-red-400 hover:bg-red-300 border-2 border-black px-2 py-1 font-bold text-xs text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] transition-all"
+            className="bg-red-400 hover:bg-red-300 border-2 border-black px-2 py-1 font-bold text-xs text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] transition-all whitespace-nowrap"
           >
-            DISCONNECT
+            <span className="hidden sm:inline">DISCONNECT</span>
+            <span className="sm:hidden">✕</span>
           </button>
         </div>
       ) : (
-        <WalletMultiButton className="!bg-yellow-400 hover:!bg-yellow-300 !text-black !font-bold !border-2 !border-black !shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:!shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] !transition-all !rounded-none" />
+        <WalletMultiButton className="!bg-yellow-400 hover:!bg-yellow-300 !text-black !font-bold !border-2 !border-black !shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:!shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] !transition-all !rounded-none !text-xs sm:!text-sm !px-3 sm:!px-4" />
       )}
     </div>
   );

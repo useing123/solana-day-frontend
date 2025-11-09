@@ -252,29 +252,29 @@ export function ChatInterface() {
   return (
     <div className="h-screen flex flex-col bg-main border-2 border-black">
       {/* Header Bar */}
-      <div className="flex items-center justify-between p-4 bg-white border-b-2 border-black">
-        <div className="flex items-center gap-3">
-          <div className="bg-black text-white px-3 py-1 font-bold text-xl">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 bg-white border-b-2 border-black gap-3 sm:gap-4">
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+          <div className="bg-black text-white px-2 sm:px-3 py-1 font-bold text-base sm:text-xl whitespace-nowrap">
             ⚡ SOLANA YIELD
           </div>
-          <div className="bg-yellow-400 px-2 py-1 text-xs font-bold border-2 border-black">
+          <div className="bg-yellow-400 px-2 py-1 text-xs font-bold border-2 border-black whitespace-nowrap">
             AI GENERATOR
           </div>
-          <div className="bg-cyan-400 px-2 py-1 text-xs font-bold border-2 border-black">
+          <div className="bg-cyan-400 px-2 py-1 text-xs font-bold border-2 border-black whitespace-nowrap">
             SHOWCASE DEMO
           </div>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4 w-full sm:w-auto justify-between sm:justify-end">
           <WalletButton />
-          <div className="flex items-center gap-3">
-            <div className="w-3 h-3 bg-green-500 border border-black animate-pulse"></div>
-            <span className="font-bold text-sm">STREAMING</span>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 border border-black animate-pulse"></div>
+            <span className="font-bold text-xs sm:text-sm whitespace-nowrap">STREAMING</span>
           </div>
         </div>
       </div>
 
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-100">
+      <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4 bg-gray-100">
         {messages.map((message) => (
           <div key={message.id} className="space-y-4">
             <Message
@@ -299,23 +299,23 @@ export function ChatInterface() {
       </div>
 
       {/* Status Bar */}
-      <div className="bg-black text-white p-4 border-t-2 border-black">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-6">
+      <div className="bg-black text-white p-3 sm:p-4 border-t-2 border-black">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-6">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-green-400 animate-pulse"></div>
-              <span className="font-bold text-sm">AI GENERATOR ACTIVE</span>
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-400 animate-pulse"></div>
+              <span className="font-bold text-xs sm:text-sm whitespace-nowrap">AI GENERATOR ACTIVE</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-yellow-400"></div>
-              <span className="font-bold text-sm">{messages.length} IDEAS GENERATED</span>
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-400"></div>
+              <span className="font-bold text-xs sm:text-sm whitespace-nowrap">{messages.length} IDEAS</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-cyan-400"></div>
-              <span className="font-bold text-sm">SOLANA PROTOCOLS</span>
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-cyan-400"></div>
+              <span className="font-bold text-xs sm:text-sm whitespace-nowrap">SOLANA PROTOCOLS</span>
             </div>
           </div>
-          <div className="bg-purple-400 text-black px-4 py-2 font-black border-2 border-white">
+          <div className="bg-purple-400 text-black px-3 sm:px-4 py-1 sm:py-2 font-black text-xs sm:text-sm border-2 border-white whitespace-nowrap">
             DEMO MODE
           </div>
         </div>
