@@ -69,29 +69,29 @@ export function InvestmentSuggestion({
   };
 
   return (
-    <div className="border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-4">
-      <div className="space-y-4">
+    <div className="border-2 sm:border-4 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-3 sm:p-4">
+      <div className="space-y-3 sm:space-y-4">
         {/* Header */}
-        <div className="flex items-start justify-between">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2">
-              <h3 className="text-xl font-black text-black uppercase">{protocol}</h3>
-              <div className={cn("px-3 py-1 font-black text-xs border-2 border-black flex items-center gap-1", getRiskColor(riskLevel))}>
+        <div className="flex flex-col sm:flex-row items-start justify-between gap-3 sm:gap-4">
+          <div className="space-y-2 flex-1">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+              <h3 className="text-lg sm:text-xl font-black text-black uppercase">{protocol}</h3>
+              <div className={cn("px-2 sm:px-3 py-1 font-black text-xs border-2 border-black flex items-center gap-1 w-fit", getRiskColor(riskLevel))}>
                 {getRiskIcon(riskLevel)}
                 {riskLevel.toUpperCase()}
               </div>
             </div>
-            <div className="bg-black text-white px-3 py-1 font-bold text-sm inline-block">
+            <div className="bg-black text-white px-2 sm:px-3 py-1 font-bold text-xs sm:text-sm inline-block">
               {tokenPair}
             </div>
           </div>
-          <div className="text-right">
-            <div className="bg-green-400 border-2 border-black p-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-              <div className="text-3xl font-black text-black flex items-center gap-1">
-                <TrendingUp className="h-6 w-6" />
+          <div className="text-left sm:text-right">
+            <div className="bg-green-400 border-2 border-black p-2 sm:p-3 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+              <div className="text-2xl sm:text-3xl font-black text-black flex items-center gap-1">
+                <TrendingUp className="h-5 w-5 sm:h-6 sm:w-6" />
                 {apy}%
               </div>
-              <div className="text-sm font-bold text-black">APY</div>
+              <div className="text-xs sm:text-sm font-bold text-black">APY</div>
             </div>
           </div>
         </div>
@@ -140,33 +140,33 @@ export function InvestmentSuggestion({
         </div>
 
         {/* Token Details Section */}
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-3 gap-2 sm:gap-3">
           <div className="bg-purple-200 border-2 border-black p-2 text-center">
-            <div className="font-black text-xs">24H VOLUME</div>
-            <div className="font-bold text-lg">${(Math.random() * 50 + 10).toFixed(1)}M</div>
+            <div className="font-black text-[10px] sm:text-xs">24H VOLUME</div>
+            <div className="font-bold text-sm sm:text-lg">${(Math.random() * 50 + 10).toFixed(1)}M</div>
           </div>
           <div className="bg-blue-200 border-2 border-black p-2 text-center">
-            <div className="font-black text-xs">LIQUIDITY</div>
-            <div className="font-bold text-lg">${(Math.random() * 100 + 50).toFixed(0)}M</div>
+            <div className="font-black text-[10px] sm:text-xs">LIQUIDITY</div>
+            <div className="font-bold text-sm sm:text-lg">${(Math.random() * 100 + 50).toFixed(0)}M</div>
           </div>
           <div className="bg-orange-200 border-2 border-black p-2 text-center">
-            <div className="font-black text-xs">FEES (24H)</div>
-            <div className="font-bold text-lg">${(Math.random() * 500 + 100).toFixed(0)}K</div>
+            <div className="font-black text-[10px] sm:text-xs">FEES (24H)</div>
+            <div className="font-bold text-sm sm:text-lg">${(Math.random() * 500 + 100).toFixed(0)}K</div>
           </div>
         </div>
 
         {/* Investment Section */}
-        <div className="bg-black text-white p-3 border-2 border-black">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-4">
-              <span className="font-bold text-xs">
+        <div className="bg-black text-white p-2 sm:p-3 border-2 border-black">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 gap-2 sm:gap-3">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 w-full sm:w-auto">
+              <span className="font-bold text-[10px] sm:text-xs">
                 {timestamp.toLocaleString().toUpperCase()}
               </span>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => onReaction?.(id, 'like')}
                   className={cn(
-                    "px-3 py-1 font-bold text-xs border-2 border-white transition-all hover:scale-105",
+                    "px-2 sm:px-3 py-1 font-bold text-xs border-2 border-white transition-all hover:scale-105",
                     reactions.userLiked
                       ? "bg-green-400 text-black shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
                       : "bg-blue-400 text-black hover:bg-blue-300"
@@ -178,7 +178,7 @@ export function InvestmentSuggestion({
                 <button
                   onClick={() => onReaction?.(id, 'dislike')}
                   className={cn(
-                    "px-3 py-1 font-bold text-xs border-2 border-white transition-all hover:scale-105",
+                    "px-2 sm:px-3 py-1 font-bold text-xs border-2 border-white transition-all hover:scale-105",
                     reactions.userDisliked
                       ? "bg-red-500 text-white shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
                       : "bg-pink-400 text-black hover:bg-pink-300"
@@ -190,22 +190,22 @@ export function InvestmentSuggestion({
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <span className="font-bold text-xs">{investorCount} WATCHING</span>
+              <span className="font-bold text-[10px] sm:text-xs whitespace-nowrap">{investorCount} WATCHING</span>
             </div>
           </div>
 
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
             <button
               onClick={handleInvest}
               disabled={isInvesting}
-              className="bg-yellow-400 hover:bg-yellow-300 text-black font-black px-6 py-3 text-sm border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all disabled:opacity-50 uppercase flex-1"
+              className="bg-yellow-400 hover:bg-yellow-300 text-black font-black px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm border-2 border-white shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] sm:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:shadow-[1px_1px_0px_0px_rgba(255,255,255,1)] sm:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[1px] hover:translate-y-[1px] sm:hover:translate-x-[2px] sm:hover:translate-y-[2px] transition-all disabled:opacity-50 uppercase flex-1"
             >
               {isInvesting ? "BOOKMARKING..." : "📊 ADD TO WATCHLIST"}
             </button>
-            <button className="bg-cyan-400 hover:bg-cyan-300 text-black font-black px-4 py-3 text-sm border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
+            <button className="bg-cyan-400 hover:bg-cyan-300 text-black font-black px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm border-2 border-white shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] sm:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:shadow-[1px_1px_0px_0px_rgba(255,255,255,1)] sm:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[1px] hover:translate-y-[1px] sm:hover:translate-x-[2px] sm:hover:translate-y-[2px] transition-all">
               🔗 PROTOCOL
             </button>
-            <button className="bg-green-400 hover:bg-green-300 text-black font-black px-4 py-3 text-sm border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
+            <button className="bg-green-400 hover:bg-green-300 text-black font-black px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm border-2 border-white shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] sm:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:shadow-[1px_1px_0px_0px_rgba(255,255,255,1)] sm:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[1px] hover:translate-y-[1px] sm:hover:translate-x-[2px] sm:hover:translate-y-[2px] transition-all">
               📈 CHART
             </button>
           </div>
